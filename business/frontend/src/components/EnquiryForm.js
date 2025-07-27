@@ -249,17 +249,16 @@ const EnquiryForm = () => {
 
                   <div>
                     <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
-                      Project Description *
+                      Project Description
                     </label>
                     <textarea
                       id="description"
                       name="description"
                       value={formData.description}
                       onChange={handleChange}
-                      required
                       rows="4"
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors resize-none"
-                      placeholder="Please describe your printing requirements in detail..."
+                      placeholder="Please describe your printing requirements in detail... (optional)"
                     />
                   </div>
 

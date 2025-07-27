@@ -33,9 +33,10 @@ export const validateContactForm = [
     .withMessage('Phone number must be between 8 and 20 characters'),
   
   body('message')
+    .optional()
     .trim()
-    .isLength({ min: 10, max: 1000 })
-    .withMessage('Message must be between 10 and 1000 characters'),
+    .isLength({ min: 1, max: 1000 })
+    .withMessage('Message must be between 1 and 1000 characters'),
   
   handleValidationErrors
 ];
@@ -79,9 +80,10 @@ export const validateEnquiryForm = [
     .withMessage('Deadline must be a valid date'),
   
   body('description')
+    .optional()
     .trim()
-    .isLength({ min: 10, max: 2000 })
-    .withMessage('Description must be between 10 and 2000 characters'),
+    .isLength({ min: 1, max: 2000 })
+    .withMessage('Description must be between 1 and 2000 characters'),
   
   body('budget')
     .optional()
