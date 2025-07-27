@@ -6,6 +6,7 @@ const AdminDashboard = () => {
   const [contacts, setContacts] = useState([]);
   const [enquiries, setEnquiries] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [activeTab, setActiveTab] = useState('contacts');
   const [selectedItem, setSelectedItem] = useState(null);
 
@@ -16,6 +17,7 @@ const AdminDashboard = () => {
   const fetchData = async () => {
     try {
       setLoading(true);
+      setError(null);
       const [contactsData, enquiriesData] = await Promise.all([
         apiRequest(API_ENDPOINTS.CONTACT_GET_ALL),
         apiRequest(API_ENDPOINTS.ENQUIRY_GET_ALL)
@@ -25,6 +27,7 @@ const AdminDashboard = () => {
       setEnquiries(enquiriesData.data || []);
     } catch (error) {
       console.error('Failed to fetch data:', error);
+      setError('Failed to load dashboard data. Please check if the backend server is running.');
     } finally {
       setLoading(false);
     }
@@ -84,6 +87,28 @@ const AdminDashboard = () => {
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto"></div>
           <p className="mt-4 text-gray-600">Loading dashboard...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center max-w-md mx-auto p-6">
+          <div className="bg-red-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+            <svg className="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+            </svg>
+          </div>
+          <h2 className="text-xl font-semibold text-gray-900 mb-2">Connection Error</h2>
+          <p className="text-gray-600 mb-4">{error}</p>
+          <button
+            onClick={fetchData}
+            className="bg-primary-600 hover:bg-primary-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
+          >
+            Try Again
+          </button>
         </div>
       </div>
     );

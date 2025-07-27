@@ -62,26 +62,33 @@ const Navbar = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={toggleMenu}
-            className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+            className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500"
+            aria-label={isOpen ? "Close menu" : "Open menu"}
           >
-            {isOpen ? <FaTimes className="text-gray-700" /> : <FaBars className="text-gray-700" />}
+            {isOpen ? (
+              <FaTimes className="text-gray-700 w-6 h-6" />
+            ) : (
+              <FaBars className="text-gray-700 w-6 h-6" />
+            )}
           </button>
         </div>
 
         {/* Mobile Navigation */}
-        {isOpen && (
-          <div className="md:hidden py-4 border-t border-gray-200">
-            <div className="flex flex-col space-y-4">
+        <div className={`md:hidden transition-all duration-300 ease-in-out overflow-hidden ${
+          isOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
+        }`}>
+          <div className="py-4 border-t border-gray-200 bg-white">
+            <div className="flex flex-col space-y-4 animate-fade-in">
               <Link
                 to="/"
-                className="text-gray-700 hover:text-primary-600 font-medium transition-colors"
+                className="text-gray-700 hover:text-primary-600 font-medium transition-colors py-3 px-4 rounded-lg hover:bg-gray-50 active:bg-gray-100"
                 onClick={() => setIsOpen(false)}
               >
                 Home
               </Link>
               <a
                 href="#services"
-                className="text-gray-700 hover:text-primary-600 font-medium transition-colors"
+                className="text-gray-700 hover:text-primary-600 font-medium transition-colors py-3 px-4 rounded-lg hover:bg-gray-50 active:bg-gray-100"
                 onClick={() => {
                   setIsOpen(false);
                   // Smooth scroll to section
@@ -94,7 +101,7 @@ const Navbar = () => {
               </a>
               <a
                 href="#about"
-                className="text-gray-700 hover:text-primary-600 font-medium transition-colors"
+                className="text-gray-700 hover:text-primary-600 font-medium transition-colors py-3 px-4 rounded-lg hover:bg-gray-50 active:bg-gray-100"
                 onClick={() => {
                   setIsOpen(false);
                   // Smooth scroll to section
@@ -107,7 +114,7 @@ const Navbar = () => {
               </a>
               <a
                 href="#contact"
-                className="text-gray-700 hover:text-primary-600 font-medium transition-colors"
+                className="text-gray-700 hover:text-primary-600 font-medium transition-colors py-3 px-4 rounded-lg hover:bg-gray-50 active:bg-gray-100"
                 onClick={() => {
                   setIsOpen(false);
                   // Smooth scroll to section
@@ -120,26 +127,26 @@ const Navbar = () => {
               </a>
               <Link
                 to="/enquiry"
-                className="btn-primary text-center"
+                className="btn-primary text-center py-3 px-4"
                 onClick={() => setIsOpen(false)}
               >
                 Get Quote
               </Link>
               
               {/* Mobile Contact Info */}
-              <div className="pt-4 border-t border-gray-200 space-y-2">
-                <div className="flex items-center space-x-2 text-sm text-gray-600">
-                  <FaPhone className="text-primary-600" />
-                  <span>9361259552</span>
+              <div className="pt-4 border-t border-gray-200 space-y-3">
+                <div className="flex items-center space-x-3 text-sm text-gray-600 p-3 bg-gray-50 rounded-lg">
+                  <FaPhone className="text-primary-600 flex-shrink-0" />
+                  <span className="break-all">9361259552</span>
                 </div>
-                <div className="flex items-center space-x-2 text-sm text-gray-600">
-                  <FaEnvelope className="text-primary-600" />
-                  <span>shribalajiprinters6@gmail.com</span>
+                <div className="flex items-center space-x-3 text-sm text-gray-600 p-3 bg-gray-50 rounded-lg">
+                  <FaEnvelope className="text-primary-600 flex-shrink-0" />
+                  <span className="break-all">shribalajiprinters6@gmail.com</span>
                 </div>
               </div>
             </div>
           </div>
-        )}
+        </div>
       </div>
     </nav>
   );
